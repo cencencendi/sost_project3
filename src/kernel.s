@@ -143,7 +143,7 @@ main:
   bl Wait @; Wait a bit -
   
 
-  @;Digit 4
+ @;Digit 3
   mov r0, #1 @; Move 1 (= on) to the first argument
   bl SetActLEDState @; Call the SetActLEDState function
   ldr r0, =200000 @; 0.2 seconds
@@ -151,7 +151,7 @@ main:
   mov r0, #0 @; Move 1 (= on) to the first argument
   bl SetActLEDState @; Call the SetActLEDState function
   ldr r0, =200000 @; 0.2 seconds
-  bl Wait @; Wait a bit-
+  bl Wait @; Wait a bit -
   mov r0, #1 @; Move 1 (= on) to the first argument
   bl SetActLEDState @; Call the SetActLEDState function
   ldr r0, =200000 @; 0.2 seconds
@@ -159,15 +159,7 @@ main:
   mov r0, #0 @; Move 1 (= on) to the first argument
   bl SetActLEDState @; Call the SetActLEDState function
   ldr r0, =200000 @; 0.2 seconds
-  bl Wait @; Wait a bit-
-  mov r0, #1 @; Move 1 (= on) to the first argument
-  bl SetActLEDState @; Call the SetActLEDState function
-  ldr r0, =200000 @; 0.2 seconds
-  bl Wait @; Wait a bit
-  mov r0, #0 @; Move 1 (= on) to the first argument
-  bl SetActLEDState @; Call the SetActLEDState function
-  ldr r0, =200000 @; 0.2 seconds
-  bl Wait @; Wait a bit-
+  bl Wait @; Wait a bit -
   mov r0, #1 @; Move 1 (= on) to the first argument
   bl SetActLEDState @; Call the SetActLEDState function
   ldr r0, =200000 @; 0.2 seconds
@@ -175,10 +167,34 @@ main:
   mov r0, #0 @; Move 1 (= on) to the first argument
   bl SetActLEDState @; Call the SetActLEDState function
   ldr r0, =2000000 @; 0.2 seconds
-  bl Wait @; Wait a bit-
+  bl Wait @; Wait a bit -
 
   
-  @;Digit 2
+ @;Digit 7
+  mov r0, #1 @; Move 1 (= on) to the first argument
+  bl SetActLEDState @; Call the SetActLEDState function
+  ldr r0, =200000 @; 0.2 seconds
+  bl Wait @; Wait a bit
+  mov r0, #0 @; Move 1 (= on) to the first argument
+  bl SetActLEDState @; Call the SetActLEDState function
+  ldr r0, =200000 @; 0.2 seconds
+  bl Wait @; Wait a bit -
+  mov r0, #1 @; Move 1 (= on) to the first argument
+  bl SetActLEDState @; Call the SetActLEDState function
+  ldr r0, =200000 @; 0.2 seconds
+  bl Wait @; Wait a bit
+  mov r0, #0 @; Move 0 (= off) to the first argument
+  bl SetActLEDState @; Call the SetActLEDState function
+  ldr r0, =200000 @; 0.2 seconds
+  bl Wait @; Wait a bit -
+  mov r0, #1 @; Move 1 (= on) to the first argument
+  bl SetActLEDState @; Call the SetActLEDState function
+  ldr r0, =200000 @; 0.2 seconds
+  bl Wait @; Wait a bit
+  mov r0, #0 @; Move 0 (= off) to the first argument
+  bl SetActLEDState @; Call the SetActLEDState function
+  ldr r0, =200000 @; 0.2 seconds
+  bl Wait @; Wait a bit-
   mov r0, #1 @; Move 1 (= on) to the first argument
   bl SetActLEDState @; Call the SetActLEDState function
   ldr r0, =200000 @; 0.2 seconds
@@ -193,6 +209,25 @@ main:
   bl Wait @; Wait a bit
   mov r0, #0 @; Move 1 (= on) to the first argument
   bl SetActLEDState @; Call the SetActLEDState function
-  ldr r0, =2000000 @; 0.2 seconds
+  ldr r0, =200000 @; 0.2 seconds
   bl Wait @; Wait a bit-
- 
+  mov r0, #1 @; Move 1 (= on) to the first argument
+  bl SetActLEDState @; Call the SetActLEDState function
+  ldr r0, =200000 @; 0.2 seconds
+  bl Wait @; Wait a bit
+  mov r0, #0 @; Move 1 (= on) to the first argument
+  bl SetActLEDState @; Call the SetActLEDState function
+  ldr r0, =200000 @; 0.2 seconds
+  bl Wait @; Wait a bit-
+  mov r0, #1 @; Move 1 (= on) to the first argument
+  bl SetActLEDState @; Call the SetActLEDState function
+  ldr r0, =200000 @; 0.2 seconds
+  bl Wait @; Wait a bit
+  mov r0, #0 @; Move 1 (= on) to the first argument
+  bl SetActLEDState @; Call the SetActLEDState function
+  ldr r0, =200000 @; 0.2 seconds
+  bl Wait @; Wait a bit-
+  mov r0, #1 @; Move 1 (= on) to the first argument
+  bl SetActLEDState @; Call the SetActLEDState function
+  ldr r0, =200000 @; 0.2 seconds
+  bl Wait @; Wait a bit
