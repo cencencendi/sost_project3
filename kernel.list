@@ -1,0 +1,266 @@
+
+build/kernel.elf:     file format elf32-littlearm
+
+
+Disassembly of section .init:
+
+00008000 <_start>:
+    8000:	e3a0d902 	mov	sp, #32768	; 0x8000
+    8004:	ea00002a 	b	80b4 <main>
+
+Disassembly of section .text:
+
+00008008 <Wait>:
+    8008:	e52d4004 	push	{r4}		; (str r4, [sp, #-4]!)
+    800c:	e59f1018 	ldr	r1, [pc, #24]	; 802c <loop$+0x18>
+    8010:	e5912004 	ldr	r2, [r1, #4]
+
+00008014 <loop$>:
+    8014:	e5914004 	ldr	r4, [r1, #4]
+    8018:	e0443002 	sub	r3, r4, r2
+    801c:	e1530000 	cmp	r3, r0
+    8020:	9afffffb 	bls	8014 <loop$>
+    8024:	e49d4004 	pop	{r4}		; (ldr r4, [sp], #4)
+    8028:	e1a0f00e 	mov	pc, lr
+    802c:	3f003000 	svccc	0x00003000
+
+00008030 <MailboxWrite>:
+    8030:	e0800001 	add	r0, r0, r1
+    8034:	e59f2038 	ldr	r2, [pc, #56]	; 8074 <wait_read$+0x24>
+
+00008038 <wait_write$>:
+    8038:	e5923038 	ldr	r3, [r2, #56]	; 0x38
+    803c:	e3130102 	tst	r3, #-2147483648	; 0x80000000
+    8040:	1afffffc 	bne	8038 <wait_write$>
+    8044:	e5820020 	str	r0, [r2, #32]
+    8048:	e1a0f00e 	mov	pc, lr
+
+0000804c <MailboxRead>:
+    804c:	e59f1020 	ldr	r1, [pc, #32]	; 8074 <wait_read$+0x24>
+
+00008050 <wait_read$>:
+    8050:	e5912018 	ldr	r2, [r1, #24]
+    8054:	e3120101 	tst	r2, #1073741824	; 0x40000000
+    8058:	1afffffc 	bne	8050 <wait_read$>
+    805c:	e5912000 	ldr	r2, [r1]
+    8060:	e202300f 	and	r3, r2, #15
+    8064:	e1330000 	teq	r3, r0
+    8068:	1afffff8 	bne	8050 <wait_read$>
+    806c:	e1a00002 	mov	r0, r2
+    8070:	e1a0f00e 	mov	pc, lr
+    8074:	3f00b880 	svccc	0x0000b880
+
+00008078 <SetActLEDState>:
+    8078:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+    807c:	e1a02000 	mov	r2, r0
+    8080:	e59f0028 	ldr	r0, [pc, #40]	; 80b0 <SetActLEDState+0x38>
+    8084:	e3a03000 	mov	r3, #0
+    8088:	e5803004 	str	r3, [r0, #4]
+    808c:	e5803010 	str	r3, [r0, #16]
+    8090:	e3a03082 	mov	r3, #130	; 0x82
+    8094:	e5803014 	str	r3, [r0, #20]
+    8098:	e5802018 	str	r2, [r0, #24]
+    809c:	e3a01008 	mov	r1, #8
+    80a0:	ebffffe2 	bl	8030 <MailboxWrite>
+    80a4:	e3a00008 	mov	r0, #8
+    80a8:	ebffffe7 	bl	804c <MailboxRead>
+    80ac:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+    80b0:	00008370 	andeq	r8, r0, r0, ror r3
+
+000080b4 <main>:
+    80b4:	e3a00001 	mov	r0, #1
+    80b8:	ebffffee 	bl	8078 <SetActLEDState>
+    80bc:	e59f02a0 	ldr	r0, [pc, #672]	; 8364 <main+0x2b0>
+    80c0:	ebffffd0 	bl	8008 <Wait>
+    80c4:	e3a00000 	mov	r0, #0
+    80c8:	ebffffea 	bl	8078 <SetActLEDState>
+    80cc:	e59f0290 	ldr	r0, [pc, #656]	; 8364 <main+0x2b0>
+    80d0:	ebffffcc 	bl	8008 <Wait>
+    80d4:	e3a00001 	mov	r0, #1
+    80d8:	ebffffe6 	bl	8078 <SetActLEDState>
+    80dc:	e59f0280 	ldr	r0, [pc, #640]	; 8364 <main+0x2b0>
+    80e0:	ebffffc8 	bl	8008 <Wait>
+    80e4:	e3a00000 	mov	r0, #0
+    80e8:	ebffffe2 	bl	8078 <SetActLEDState>
+    80ec:	e59f0270 	ldr	r0, [pc, #624]	; 8364 <main+0x2b0>
+    80f0:	ebffffc4 	bl	8008 <Wait>
+    80f4:	e3a00001 	mov	r0, #1
+    80f8:	ebffffde 	bl	8078 <SetActLEDState>
+    80fc:	e59f0260 	ldr	r0, [pc, #608]	; 8364 <main+0x2b0>
+    8100:	ebffffc0 	bl	8008 <Wait>
+    8104:	e3a00000 	mov	r0, #0
+    8108:	ebffffda 	bl	8078 <SetActLEDState>
+    810c:	e59f0250 	ldr	r0, [pc, #592]	; 8364 <main+0x2b0>
+    8110:	ebffffbc 	bl	8008 <Wait>
+    8114:	e3a00001 	mov	r0, #1
+    8118:	ebffffd6 	bl	8078 <SetActLEDState>
+    811c:	e59f0240 	ldr	r0, [pc, #576]	; 8364 <main+0x2b0>
+    8120:	ebffffb8 	bl	8008 <Wait>
+    8124:	e3a00000 	mov	r0, #0
+    8128:	ebffffd2 	bl	8078 <SetActLEDState>
+    812c:	e59f0234 	ldr	r0, [pc, #564]	; 8368 <main+0x2b4>
+    8130:	ebffffb4 	bl	8008 <Wait>
+    8134:	e3a00001 	mov	r0, #1
+    8138:	ebffffce 	bl	8078 <SetActLEDState>
+    813c:	e59f0220 	ldr	r0, [pc, #544]	; 8364 <main+0x2b0>
+    8140:	ebffffb0 	bl	8008 <Wait>
+    8144:	e3a00000 	mov	r0, #0
+    8148:	ebffffca 	bl	8078 <SetActLEDState>
+    814c:	e59f0210 	ldr	r0, [pc, #528]	; 8364 <main+0x2b0>
+    8150:	ebffffac 	bl	8008 <Wait>
+    8154:	e3a00001 	mov	r0, #1
+    8158:	ebffffc6 	bl	8078 <SetActLEDState>
+    815c:	e59f0200 	ldr	r0, [pc, #512]	; 8364 <main+0x2b0>
+    8160:	ebffffa8 	bl	8008 <Wait>
+    8164:	e3a00000 	mov	r0, #0
+    8168:	ebffffc2 	bl	8078 <SetActLEDState>
+    816c:	e59f01f0 	ldr	r0, [pc, #496]	; 8364 <main+0x2b0>
+    8170:	ebffffa4 	bl	8008 <Wait>
+    8174:	e3a00001 	mov	r0, #1
+    8178:	ebffffbe 	bl	8078 <SetActLEDState>
+    817c:	e59f01e0 	ldr	r0, [pc, #480]	; 8364 <main+0x2b0>
+    8180:	ebffffa0 	bl	8008 <Wait>
+    8184:	e3a00000 	mov	r0, #0
+    8188:	ebffffba 	bl	8078 <SetActLEDState>
+    818c:	e59f01d0 	ldr	r0, [pc, #464]	; 8364 <main+0x2b0>
+    8190:	ebffff9c 	bl	8008 <Wait>
+    8194:	e3a00001 	mov	r0, #1
+    8198:	ebffffb6 	bl	8078 <SetActLEDState>
+    819c:	e59f01c0 	ldr	r0, [pc, #448]	; 8364 <main+0x2b0>
+    81a0:	ebffff98 	bl	8008 <Wait>
+    81a4:	e3a00000 	mov	r0, #0
+    81a8:	ebffffb2 	bl	8078 <SetActLEDState>
+    81ac:	e59f01b0 	ldr	r0, [pc, #432]	; 8364 <main+0x2b0>
+    81b0:	ebffff94 	bl	8008 <Wait>
+    81b4:	e3a00001 	mov	r0, #1
+    81b8:	ebffffae 	bl	8078 <SetActLEDState>
+    81bc:	e59f01a0 	ldr	r0, [pc, #416]	; 8364 <main+0x2b0>
+    81c0:	ebffff90 	bl	8008 <Wait>
+    81c4:	e3a00000 	mov	r0, #0
+    81c8:	ebffffaa 	bl	8078 <SetActLEDState>
+    81cc:	e59f0190 	ldr	r0, [pc, #400]	; 8364 <main+0x2b0>
+    81d0:	ebffff8c 	bl	8008 <Wait>
+    81d4:	e3a00001 	mov	r0, #1
+    81d8:	ebffffa6 	bl	8078 <SetActLEDState>
+    81dc:	e59f0180 	ldr	r0, [pc, #384]	; 8364 <main+0x2b0>
+    81e0:	ebffff88 	bl	8008 <Wait>
+    81e4:	e3a00000 	mov	r0, #0
+    81e8:	ebffffa2 	bl	8078 <SetActLEDState>
+    81ec:	e59f0170 	ldr	r0, [pc, #368]	; 8364 <main+0x2b0>
+    81f0:	ebffff84 	bl	8008 <Wait>
+    81f4:	e3a00001 	mov	r0, #1
+    81f8:	ebffff9e 	bl	8078 <SetActLEDState>
+    81fc:	e59f0160 	ldr	r0, [pc, #352]	; 8364 <main+0x2b0>
+    8200:	ebffff80 	bl	8008 <Wait>
+    8204:	e3a00000 	mov	r0, #0
+    8208:	ebffff9a 	bl	8078 <SetActLEDState>
+    820c:	e59f0150 	ldr	r0, [pc, #336]	; 8364 <main+0x2b0>
+    8210:	ebffff7c 	bl	8008 <Wait>
+    8214:	e3a00001 	mov	r0, #1
+    8218:	ebffff96 	bl	8078 <SetActLEDState>
+    821c:	e59f0140 	ldr	r0, [pc, #320]	; 8364 <main+0x2b0>
+    8220:	ebffff78 	bl	8008 <Wait>
+    8224:	e3a00000 	mov	r0, #0
+    8228:	ebffff92 	bl	8078 <SetActLEDState>
+    822c:	e59f0130 	ldr	r0, [pc, #304]	; 8364 <main+0x2b0>
+    8230:	ebffff74 	bl	8008 <Wait>
+    8234:	e3a00000 	mov	r0, #0
+    8238:	ebffff8e 	bl	8078 <SetActLEDState>
+    823c:	e59f0124 	ldr	r0, [pc, #292]	; 8368 <main+0x2b4>
+    8240:	ebffff70 	bl	8008 <Wait>
+    8244:	e3a00001 	mov	r0, #1
+    8248:	ebffff8a 	bl	8078 <SetActLEDState>
+    824c:	e59f0110 	ldr	r0, [pc, #272]	; 8364 <main+0x2b0>
+    8250:	ebffff6c 	bl	8008 <Wait>
+    8254:	e3a00000 	mov	r0, #0
+    8258:	ebffff86 	bl	8078 <SetActLEDState>
+    825c:	e59f0100 	ldr	r0, [pc, #256]	; 8364 <main+0x2b0>
+    8260:	ebffff68 	bl	8008 <Wait>
+    8264:	e3a00001 	mov	r0, #1
+    8268:	ebffff82 	bl	8078 <SetActLEDState>
+    826c:	e59f00f0 	ldr	r0, [pc, #240]	; 8364 <main+0x2b0>
+    8270:	ebffff64 	bl	8008 <Wait>
+    8274:	e3a00000 	mov	r0, #0
+    8278:	ebffff7e 	bl	8078 <SetActLEDState>
+    827c:	e59f00e0 	ldr	r0, [pc, #224]	; 8364 <main+0x2b0>
+    8280:	ebffff60 	bl	8008 <Wait>
+    8284:	e3a00001 	mov	r0, #1
+    8288:	ebffff7a 	bl	8078 <SetActLEDState>
+    828c:	e59f00d0 	ldr	r0, [pc, #208]	; 8364 <main+0x2b0>
+    8290:	ebffff5c 	bl	8008 <Wait>
+    8294:	e3a00000 	mov	r0, #0
+    8298:	ebffff76 	bl	8078 <SetActLEDState>
+    829c:	e59f00c4 	ldr	r0, [pc, #196]	; 8368 <main+0x2b4>
+    82a0:	ebffff58 	bl	8008 <Wait>
+    82a4:	e3a00001 	mov	r0, #1
+    82a8:	ebffff72 	bl	8078 <SetActLEDState>
+    82ac:	e59f00b0 	ldr	r0, [pc, #176]	; 8364 <main+0x2b0>
+    82b0:	ebffff54 	bl	8008 <Wait>
+    82b4:	e3a00000 	mov	r0, #0
+    82b8:	ebffff6e 	bl	8078 <SetActLEDState>
+    82bc:	e59f00a0 	ldr	r0, [pc, #160]	; 8364 <main+0x2b0>
+    82c0:	ebffff50 	bl	8008 <Wait>
+    82c4:	e3a00001 	mov	r0, #1
+    82c8:	ebffff6a 	bl	8078 <SetActLEDState>
+    82cc:	e59f0090 	ldr	r0, [pc, #144]	; 8364 <main+0x2b0>
+    82d0:	ebffff4c 	bl	8008 <Wait>
+    82d4:	e3a00000 	mov	r0, #0
+    82d8:	ebffff66 	bl	8078 <SetActLEDState>
+    82dc:	e59f0080 	ldr	r0, [pc, #128]	; 8364 <main+0x2b0>
+    82e0:	ebffff48 	bl	8008 <Wait>
+    82e4:	e3a00001 	mov	r0, #1
+    82e8:	ebffff62 	bl	8078 <SetActLEDState>
+    82ec:	e59f0070 	ldr	r0, [pc, #112]	; 8364 <main+0x2b0>
+    82f0:	ebffff44 	bl	8008 <Wait>
+    82f4:	e3a00000 	mov	r0, #0
+    82f8:	ebffff5e 	bl	8078 <SetActLEDState>
+    82fc:	e59f0060 	ldr	r0, [pc, #96]	; 8364 <main+0x2b0>
+    8300:	ebffff40 	bl	8008 <Wait>
+    8304:	e3a00001 	mov	r0, #1
+    8308:	ebffff5a 	bl	8078 <SetActLEDState>
+    830c:	e59f0050 	ldr	r0, [pc, #80]	; 8364 <main+0x2b0>
+    8310:	ebffff3c 	bl	8008 <Wait>
+    8314:	e3a00000 	mov	r0, #0
+    8318:	ebffff56 	bl	8078 <SetActLEDState>
+    831c:	e59f0044 	ldr	r0, [pc, #68]	; 8368 <main+0x2b4>
+    8320:	ebffff38 	bl	8008 <Wait>
+    8324:	e3a00001 	mov	r0, #1
+    8328:	ebffff52 	bl	8078 <SetActLEDState>
+    832c:	e59f0030 	ldr	r0, [pc, #48]	; 8364 <main+0x2b0>
+    8330:	ebffff34 	bl	8008 <Wait>
+    8334:	e3a00000 	mov	r0, #0
+    8338:	ebffff4e 	bl	8078 <SetActLEDState>
+    833c:	e59f0020 	ldr	r0, [pc, #32]	; 8364 <main+0x2b0>
+    8340:	ebffff30 	bl	8008 <Wait>
+    8344:	e3a00001 	mov	r0, #1
+    8348:	ebffff4a 	bl	8078 <SetActLEDState>
+    834c:	e59f0010 	ldr	r0, [pc, #16]	; 8364 <main+0x2b0>
+    8350:	ebffff2c 	bl	8008 <Wait>
+    8354:	e3a00000 	mov	r0, #0
+    8358:	ebffff46 	bl	8078 <SetActLEDState>
+    835c:	e59f0004 	ldr	r0, [pc, #4]	; 8368 <main+0x2b4>
+    8360:	ebffff28 	bl	8008 <Wait>
+    8364:	00030d40 	andeq	r0, r3, r0, asr #26
+    8368:	001e8480 	andseq	r8, lr, r0, lsl #9
+
+Disassembly of section .data:
+
+00008370 <PropertyInfo>:
+    8370:	00000020 	andeq	r0, r0, r0, lsr #32
+    8374:	00000000 	andeq	r0, r0, r0
+    8378:	00038041 	andeq	r8, r3, r1, asr #32
+    837c:	00000008 	andeq	r0, r0, r8
+    8380:	00000000 	andeq	r0, r0, r0
+    8384:	00000082 	andeq	r0, r0, r2, lsl #1
+    8388:	00000001 	andeq	r0, r0, r1
+    838c:	00000000 	andeq	r0, r0, r0
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00001141 	andeq	r1, r0, r1, asr #2
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000007 	andeq	r0, r0, r7
+  10:	Address 0x0000000000000010 is out of bounds.
+
